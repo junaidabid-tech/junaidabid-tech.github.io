@@ -1,0 +1,717 @@
+<!doctype html>
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+  APPLE EXECUTIVE STORE — single-page website
+  Independent retailer. Not affiliated with Apple Inc.
+
+  OWNER EDIT GUIDE — everything you change lives in ONE place:
+  Search this file for  ★ EDIT HERE ★  (the CONFIG block in the <script>
+  at the bottom). There you can edit:
+    1. SHEET_URL  — the published Google Sheet (CSV) with today's stock
+    2. REVIEWS    — paste real Google reviews (text exactly as written)
+    3. REVIEW_LINK, MAP links, socials
+  Photos: search for  PHOTO SLOT  — each slot tells you which real shop
+  photo goes there. Replace the whole <figure class="photo-slot">…</figure>
+  with:  <figure><img src="photos/shop-front.webp" alt="…" loading="lazy"></figure>
+  Do not use stock photos.
+
+  FACTS LOCKED TO GOOGLE BUSINESS PROFILE (do not retype differently):
+  Name / address / phone / hours below match the GBP character for character.
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile Shop in Ketchary Bazar, Faisalabad — Apple Executive Store</title>
+<meta name="description" content="Apple Executive Store is a mobile shop on Street #5, Main Ketchary Bazar, Faisalabad. Phones, tablets, accessories and mobile repairs. Call or WhatsApp 0321 7357119. Open Sun–Thu & Sat 11 AM–9 PM, Fri 4–10 PM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- LocalBusiness schema — NAP identical to GBP.
+     TODO(owner): add "geo" {latitude, longitude} from your GBP map pin,
+     and replace sameAs placeholders with your real profile URLs. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobilePhoneStore",
+  "name": "Apple Executive Store",
+  "telephone": "+92 321 7357119",
+  "priceRange": "Rs",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Main Ketchary Bazar, Street #5 opposite Al Javed Center",
+    "addressLocality": "Faisalabad",
+    "postalCode": "38000",
+    "addressCountry": "PK"
+  },
+  "openingHoursSpecification": [
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday","Saturday"],"opens":"11:00","closes":"21:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"16:00","closes":"22:00"}
+  ],
+  "sameAs": [
+    "https://wa.me/923217357119"
+    /* ★ EDIT HERE ★ add: GBP URL, Facebook, Instagram, TikTok */
+  ]
+}
+</script>
+
+<style>
+/* ══ DESIGN SYSTEM — enforced, do not add one-off values ═════════════════
+   Spacing: 8px scale only (8 / 16 / 24 / 32 / 40 / 48 / 56 / 64 / 96).
+   Type: exactly four sizes — --t-display, --t-title, --t-body, --t-small.
+   Borders: one style everywhere — 1px solid. Radius: one — --radius.
+   Buttons: two styles only — .btn-primary and .btn-outline.
+   No shadows anywhere.
+   ★ EDIT HERE ★ --accent: replace with the shop signage/logo colour. */
+:root{
+  --bg:#F6F3EE; --paper:#FFFDF9; --ink:#16130E; --muted:#5C554A;
+  --line:#DDD5C7; --accent:#9C3A1B;
+  --radius:8px; --max:1180px;
+  --font-display:"Fraunces",Georgia,serif; --font-text:"Inter Tight",system-ui,sans-serif;
+  --t-display:2.5rem;   /* 40px mobile — headlines */
+  --t-title:1.5rem;     /* 24px — sub-heads, prices, big numerals */
+  --t-body:1rem;        /* 16px — all reading text */
+  --t-small:.8125rem;   /* 13px — labels, captions, fine print */
+}
+@media(min-width:900px){ :root{ --t-display:4rem } } /* 64px desktop */
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-text);
+  font-size:var(--t-body);line-height:1.5;-webkit-font-smoothing:antialiased;
+  padding-bottom:64px} /* room for the sticky mobile bar */
+figure{margin:0} img{max-width:100%;display:block}
+a{color:inherit} :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius)}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:16px;padding-right:16px}
+@media(min-width:900px){.wrap{padding-left:24px;padding-right:24px}}
+h1,h2{font-family:var(--font-display);font-weight:650;font-size:var(--t-display);line-height:1.05;margin:0}
+h3{font-family:var(--font-display);font-weight:650;font-size:var(--t-title);line-height:1.15;margin:0}
+.eyebrow{font-size:var(--t-small);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+
+/* ── Buttons: TWO styles only ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 24px;
+  border-radius:var(--radius);font-weight:600;font-size:var(--t-body);text-decoration:none;
+  border:1px solid var(--accent);transition:background .18s ease,color .18s ease}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--ink);border-color:var(--ink)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+.btn-block{width:100%}
+.btn svg{width:16px;height:16px;flex:none}
+
+section{padding-top:56px;padding-bottom:56px}
+@media(min-width:900px){section{padding-top:96px;padding-bottom:96px}}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.btn{transition:none}html{scroll-behavior:auto}}
+
+/* ── Header ── */
+header.site{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.site-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px}
+.wordmark{display:inline-block;line-height:0;text-decoration:none}
+.wordmark svg{width:160px;height:auto;display:block}
+@media(min-width:900px){.wordmark svg{width:200px}}
+nav.main{display:none;gap:24px;font-weight:500;font-size:var(--t-body)}
+nav.main a{text-decoration:none} nav.main a:hover{color:var(--accent)}
+.head-call{font-weight:700;text-decoration:none;border-bottom:1px solid var(--accent);white-space:nowrap;font-size:var(--t-body)}
+@media(min-width:760px){nav.main{display:flex}}
+
+/* ── Open / closed status ── */
+.status{display:inline-flex;align-items:center;gap:8px;font-size:var(--t-small);font-weight:600;
+  border:1px solid var(--line);background:var(--paper);border-radius:var(--radius);padding:8px 16px}
+.status .dot{width:8px;height:8px;border-radius:50%;background:#B0A695;flex:none}
+.status.open .dot{background:#2E7D43}.status.closed .dot{background:#B3402A}
+
+/* ── Hero — asymmetric: headline block left, photo offset down-right ── */
+.hero{padding-top:56px;padding-bottom:56px}
+@media(min-width:900px){.hero{padding-top:96px;padding-bottom:96px}}
+.hero-grid{display:grid;gap:32px}
+@media(min-width:900px){
+  .hero-grid{grid-template-columns:8fr 4fr;gap:48px;align-items:start}
+  .hero-photo{margin-top:96px} /* the offset: photo sits lower than the headline */
+}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .lede{max-width:40ch;margin:24px 0 8px}
+.hero .sub{color:var(--muted);margin:0}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:16px;margin:24px 0}
+.hero-facts{list-style:none;margin:24px 0 0;padding:24px 0 0;border-top:1px solid var(--line);
+  display:grid;gap:8px}
+.hero-facts b{font-weight:700}
+
+/* ── Photo slots — ONE aspect ratio (4:3), ONE thin frame ── */
+.photo-slot{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);
+  aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;gap:8px}
+.photo-slot .tag{font-size:var(--t-small);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.photo-slot p{margin:0;font-weight:600}
+.photo-slot span{color:var(--muted);font-size:var(--t-small)}
+figure.shot img{border:1px solid var(--line);border-radius:var(--radius);
+  width:100%;aspect-ratio:4/3;object-fit:cover}
+.photo-row{display:grid;gap:16px;margin-top:24px}
+@media(min-width:820px){.photo-row{grid-template-columns:1fr 1fr;gap:24px}}
+
+/* ── Section heads ── */
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:32px}
+.sec-head p{color:var(--muted);max-width:40ch;margin:0}
+
+/* ── Today's stock — live from Google Sheet. Cards reuse the site system ── */
+.stock-grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:620px){.stock-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.stock-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+@media(min-width:1240px){.stock-grid{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;display:flex;flex-direction:column;gap:8px}
+.card-photo{width:100%;aspect-ratio:4/3;object-fit:cover;
+  border:1px solid var(--line);border-radius:var(--radius)}
+.photo-fallback{width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:24px;background:var(--bg);
+  border:1px solid var(--line);border-radius:var(--radius);
+  font-family:var(--font-display);font-size:var(--t-title);font-weight:650;color:var(--muted)}
+.card .tag-row{margin:0}
+.card .storage-tag{display:inline-block;font-size:var(--t-small);font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--line);border-radius:var(--radius);padding:8px 16px;color:var(--muted)}
+.card .spec{color:var(--muted);margin:0;font-size:var(--t-small)}
+.card .price{font-size:var(--t-title);font-weight:700;margin:0;margin-top:auto;padding-top:16px}
+.card .btn{margin-top:8px}
+.stock-updated{font-size:var(--t-small);color:var(--muted);margin:8px 0 0}
+.stock-note{color:var(--muted);margin:24px 0 0}
+.stock-state{grid-column:1/-1;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px}
+.stock-state p{margin:0 0 16px;font-weight:600}
+/* Skeleton cards while the sheet loads */
+.skel{background:var(--line);border-radius:var(--radius);animation:skel-pulse 1.2s ease-in-out infinite}
+.skel-photo{aspect-ratio:4/3}
+.skel-h{height:24px;width:70%}.skel-line{height:16px;width:40%}
+.skel-price{height:24px;width:50%;margin-top:auto}.skel-btn{height:48px}
+@keyframes skel-pulse{0%,100%{opacity:.45}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}
+
+/* ── Services — editorial numbered rows ── */
+.rows{border-top:1px solid var(--ink)}
+.row{display:grid;gap:8px;padding:24px 0;border-bottom:1px solid var(--line)}
+@media(min-width:820px){.row{grid-template-columns:64px 1fr 1.2fr auto;align-items:baseline;gap:24px}}
+.row .no{font-family:var(--font-display);font-size:var(--t-title);color:var(--accent)}
+.row p{margin:0;color:var(--muted);max-width:48ch}
+.row .from{font-weight:700}
+.row .from a{color:var(--accent)}
+
+/* ── Why us ── */
+.why{display:grid;border-top:1px solid var(--ink)}
+.why article{padding:32px 0;border-bottom:1px solid var(--line);display:grid;gap:8px}
+@media(min-width:820px){.why article{grid-template-columns:96px 1fr 1.4fr;align-items:baseline;gap:24px}}
+.why .big{font-family:var(--font-display);font-size:var(--t-display);color:var(--accent);line-height:1}
+.why p{margin:0;color:var(--muted)}
+
+/* ── Reviews — same card system as stock ── */
+.rev-grid{display:grid;gap:16px}
+@media(min-width:820px){.rev-grid{grid-template-columns:1fr 1fr 1fr;gap:24px}}
+.rev{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.rev .stars{color:var(--accent);letter-spacing:.16em}
+.rev blockquote{margin:16px 0;font-family:var(--font-display);font-size:var(--t-body);line-height:1.5}
+.rev.sample blockquote{color:var(--muted);font-family:var(--font-text)}
+.rev figcaption{color:var(--muted);font-size:var(--t-small);font-weight:600}
+.rev-actions{margin:24px 0 0}
+
+/* ── Visit ── */
+.visit{display:grid;gap:32px}
+@media(min-width:900px){.visit{grid-template-columns:5fr 7fr;gap:48px}}
+.visit h2{margin-bottom:16px}
+.visit address{font-style:normal;line-height:1.5;margin-bottom:24px}
+.hours{width:100%;border-collapse:collapse;margin-top:24px}
+.hours td{padding:8px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;font-weight:600}
+.hours tr.today td{color:var(--accent);font-weight:700}
+.map{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper)}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
+
+/* ── Footer ── */
+footer.site{border-top:1px solid var(--ink);padding:48px 0 32px}
+.foot{display:grid;gap:24px}
+@media(min-width:820px){.foot{grid-template-columns:1.4fr 1fr 1fr}}
+footer.site .nap{line-height:1.5;margin:16px 0 0}
+footer.site .f-label{margin:0 0 8px}
+footer.site .f-text{margin:0}
+.socials{display:flex;gap:16px}.socials a{font-weight:600}
+.fine{color:var(--muted);font-size:var(--t-small);margin:32px 0 0}
+
+/* ── Sticky mobile action bar ── */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:1fr 1fr 1fr;
+  background:var(--ink);color:#fff}
+.bar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:16px 8px;
+  text-decoration:none;font-weight:700}
+.bar a+a{border-left:1px solid #3A352B}.bar a.wa{background:var(--accent)}
+.bar svg{width:16px;height:16px}
+@media(min-width:900px){.bar{display:none}body{padding-bottom:0}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-in">
+    <a class="wordmark" href="#top" aria-label="Apple Executive Store — home">
+      <!-- Text wordmark as SVG. Text only — no Apple Inc. logo, no apple shapes. -->
+      <svg viewBox="0 0 340 80" role="img" aria-label="Apple Executive Store" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="34" font-family="Fraunces, Georgia, serif" font-size="32" font-weight="700" letter-spacing="1" fill="#16130E">APPLE EXECUTIVE</text>
+        <text x="2" y="68" font-family="Inter Tight, system-ui, sans-serif" font-size="16" font-weight="600" letter-spacing="10" fill="#5C554A">STORE</text>
+      </svg>
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="#stock">Today's Stock</a><a href="#services">Services</a>
+      <a href="#reviews">Reviews</a><a href="#visit">Visit Us</a>
+    </nav>
+    <a class="head-call" href="tel:+923217357119">0321 7357119</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero wrap">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <p class="eyebrow">Mobile shop · Ketchary Bazar, Faisalabad</p>
+        <h1>Phones, tablets<br>and repairs.<br><em>One counter.</em></h1>
+        <p class="lede">We sell mobile phones and tablets, stock genuine accessories, and repair phones here on Street #5.</p>
+        <p class="sub">Aaiye, dekhiye — pehle phone haath mein lein, phir faisla karein.</p>
+        <p><span class="status" id="openStatus" role="status"><span class="dot"></span><span id="openStatusText">Checking hours…</span></span></p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://wa.me/923217357119?text=Assalam-o-Alaikum%2C%20mujhe%20ek%20phone%20ki%20price%20poochni%20hai." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.3.3.1.5.1.6-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.2Z"/></svg>
+            WhatsApp Us</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&amp;destination=Apple%20Executive%20Store%2C%20Main%20Ketchary%20Bazar%2C%20Street%20%235%20opposite%20Al%20Javed%20Center%2C%20Faisalabad%2038000" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+        <ul class="hero-facts">
+          <li><b>Find us:</b> opposite Al Javed Center, Street #5, Main Ketchary Bazar</li>
+          <li><b>Call / WhatsApp:</b> 0321 7357119 — one number, both work</li>
+          <li><b>Friday:</b> we open at 4 PM, not 11 AM</li>
+        </ul>
+      </div>
+
+      <!-- PHOTO SLOT 1/4 — HERO. Replace this figure with a real photo:
+           the shop front with signage, shot in daylight from across the street. -->
+      <figure class="photo-slot hero-photo reveal in" aria-label="Photo placeholder: shop front">
+        <span class="tag">Real photo slot · 1 of 4</span>
+        <p>Shop front, with signage</p>
+        <span>Daylight, from across Street #5. No stock photos — this slot stays empty until the real photo is added.</span>
+      </figure>
+    </div>
+  </div>
+
+  <!-- ═══ TODAY'S STOCK ═══
+       Cards are fetched live from the owner's Google Sheet (see SHEET_URL
+       in the script below). No stock is hardcoded in this file any more. -->
+  <section id="stock" class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="eyebrow">In the shop today</p><h2>Today's Stock</h2>
+      <p class="stock-updated" id="stockUpdated"></p></div>
+      <p>Phones listed here are the counter stock. Price aur availability pehle WhatsApp par confirm karein: 0321 7357119.</p>
+    </div>
+    <div class="stock-grid" id="stockGrid"></div>
+    <p class="stock-note">Jo model yahan nahi hai, WhatsApp par poochein — jo stock mein hoga, wohi batayenge. 0321 7357119.</p>
+  </section>
+
+  <!-- ═══ SERVICES — only services verified on the Google profile ═══ -->
+  <section id="services" class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="eyebrow">What the counter does</p><h2>Services</h2></div>
+      <p>Phone sales, tablet sales, mobile repair aur accessories — yeh chaar services hamari Google profile par listed hain.</p>
+    </div>
+    <div class="rows reveal">
+      <div class="row"><span class="no">01</span><h3>Mobile phone sales</h3>
+        <p>New phones sold at the counter. Check the set in your hand, ask every question, then pay.</p>
+        <span class="from"><a href="https://wa.me/923217357119?text=Mujhe%20phone%20ki%20aaj%20ki%20price%20chahiye." target="_blank" rel="noopener">Ask today's price</a></span></div>
+      <div class="row"><span class="no">02</span><h3>Tablet sales</h3>
+        <p>Tablets are sold at the same counter as phones. Aaj ka tablet stock WhatsApp par poochein.</p>
+        <span class="from"><a href="https://wa.me/923217357119?text=Mujhe%20tablet%20chahiye%2C%20konsa%20available%20hai%3F" target="_blank" rel="noopener">Ask on WhatsApp</a></span></div>
+      <div class="row"><span class="no">03</span><h3>Mobile phone repair</h3>
+        <p>Bring the phone in. We check it at the counter and tell you the fault and the cost before any work starts.</p>
+        <span class="from">Price after check — <a href="https://wa.me/923217357119?text=Mere%20phone%20mein%20yeh%20masla%20hai%3A%20" target="_blank" rel="noopener">describe the fault</a></span></div>
+      <div class="row"><span class="no">04</span><h3>Mobile phone accessories</h3>
+        <p>Genuine accessories, sold inside the shop. Koi specific item chahiye to pehle WhatsApp par pooch lein.</p>
+        <span class="from"><a href="https://wa.me/923217357119?text=Mujhe%20accessory%20chahiye%3A%20" target="_blank" rel="noopener">Ask on WhatsApp</a></span></div>
+      <!-- OWNER: trade-in / exchange, installments, PTA / non-PTA and used phones are
+           NOT listed here because they were never confirmed for this shop.
+           Confirm any of them and Muse will add a row with real terms. -->
+    </div>
+
+    <!-- PHOTO SLOT 2/4 — Replace with: repair bench / technician at work, real photo. -->
+    <figure class="photo-slot reveal" style="margin-top:24px" aria-label="Photo placeholder: repair bench">
+      <span class="tag">Real photo slot · 2 of 4</span>
+      <p>Repair bench, work in progress</p>
+      <span>A real repair being done at this counter.</span>
+    </figure>
+  </section>
+
+  <!-- ═══ WHY US — three claims, each tied to a checkable fact ═══ -->
+  <section id="why" class="wrap">
+    <div class="sec-head reveal"><div><p class="eyebrow">Why this shop</p><h2>Three things you can check</h2></div></div>
+    <div class="why reveal">
+      <article><span class="big">1</span><h3>Easy to find, in the main market</h3>
+        <p>Street #5, Main Ketchary Bazar, opposite Al Javed Center. If you are already in the bazar for a phone, we are on your route — no separate trip across the city.</p></article>
+      <article><span class="big">2</span><h3>Sales and repair at the same counter</h3>
+        <p>The shop that sells you the phone also repairs phones and stocks its accessories. One place to come back to if anything goes wrong with your set.</p></article>
+      <article><span class="big">3</span><h3>One number, answered in shop hours</h3>
+        <p>0321 7357119 works for calls and WhatsApp — the same number on our Google profile. Shop hours are 11 AM–9 PM, and 4–10 PM on Friday.</p></article>
+    </div>
+  </section>
+
+  <!-- ═══ REVIEWS — rendered from the REVIEWS array in the script below ═══ -->
+  <section id="reviews" class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="eyebrow">Google reviews</p><h2>What customers wrote</h2></div>
+      <p>Rated <b>4.0 from 6 Google reviews</b> (checked 30 Oct 2026). Jo review Google par hai, wohi yahan lafz-ba-lafz lagta hai.</p>
+    </div>
+    <div class="rev-grid reveal" id="reviewGrid"></div>
+    <p class="rev-actions"><a class="btn btn-outline" id="reviewBtn" href="#" target="_blank" rel="noopener">Leave a review on Google</a></p>
+    <!-- PHOTO SLOT 3/4 — Replace with: counter / staff serving a customer, real photo.
+         PHOTO SLOT 4/4 — Replace with: accessories wall or boxed stock shelves, real photo. -->
+    <div class="photo-row">
+      <figure class="photo-slot reveal" aria-label="Photo placeholder: shop counter">
+        <span class="tag">Real photo slot · 3 of 4</span>
+        <p>Counter, staff serving a customer</p>
+        <span>The counter in a working moment, real customers only with their permission.</span>
+      </figure>
+      <figure class="photo-slot reveal" aria-label="Photo placeholder: accessories wall">
+        <span class="tag">Real photo slot · 4 of 4</span>
+        <p>Accessories wall · stock shelves</p>
+        <span>The accessories wall or the boxed stock shelves inside this shop.</span>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══ VISIT ═══ -->
+  <section id="visit" class="wrap">
+    <div class="visit">
+      <div class="reveal">
+        <p class="eyebrow">Visit us</p>
+        <h2>Street #5,<br>Ketchary Bazar</h2>
+        <address>Apple Executive Store<br>Main Ketchary Bazar, Street #5 opposite Al Javed Center,<br>Faisalabad, 38000, Pakistan</address>
+        <p><span class="status" id="openStatus2"><span class="dot"></span><span id="openStatusText2">Checking hours…</span></span></p>
+        <table class="hours" aria-label="Opening hours">
+          <tbody id="hoursBody"><!-- rows rendered by script, today highlighted --></tbody>
+        </table>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="tel:+923217357119">Call 0321 7357119</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&amp;destination=Apple%20Executive%20Store%2C%20Main%20Ketchary%20Bazar%2C%20Street%20%235%20opposite%20Al%20Javed%20Center%2C%20Faisalabad%2038000" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+      <div class="map reveal">
+        <!-- Embedded map centred on the shop's address. Replace the src with the
+             exact "Embed a map" share URL from the GBP listing when available. -->
+        <iframe title="Map — Apple Executive Store, Street #5, Main Ketchary Bazar, Faisalabad"
+          src="https://www.google.com/maps?q=Apple%20Executive%20Store%2C%20Main%20Ketchary%20Bazar%2C%20Street%20%235%2C%20Faisalabad%2C%20Pakistan&amp;output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═══ FOOTER — NAP identical to GBP ═══ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="wordmark" href="#top" aria-label="Apple Executive Store — home">
+      <!-- Text wordmark as SVG. Text only — no Apple Inc. logo, no apple shapes. -->
+      <svg viewBox="0 0 340 80" role="img" aria-label="Apple Executive Store" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="34" font-family="Fraunces, Georgia, serif" font-size="32" font-weight="700" letter-spacing="1" fill="#16130E">APPLE EXECUTIVE</text>
+        <text x="2" y="68" font-family="Inter Tight, system-ui, sans-serif" font-size="16" font-weight="600" letter-spacing="10" fill="#5C554A">STORE</text>
+      </svg>
+    </a>
+        <p class="nap">Main Ketchary Bazar, Street #5 opposite Al Javed Center, Faisalabad, 38000, Pakistan<br>
+        Phone / WhatsApp: 0321 7357119</p>
+      </div>
+      <div><p class="f-label"><b>Hours</b></p>
+        <p class="f-text">Sunday–Thursday &amp; Saturday: 11 AM–9 PM<br>Friday: 4 PM–10 PM</p></div>
+      <div><p class="f-label"><b>Find us online</b></p>
+        <div class="socials">
+          <a href="https://wa.me/923217357119" target="_blank" rel="noopener">WhatsApp</a>
+          <!-- ★ EDIT HERE ★ add real links and delete the ones the shop does not have:
+               <a href="FACEBOOK_URL">Facebook</a> · <a href="INSTAGRAM_URL">Instagram</a> · <a href="TIKTOK_URL">TikTok</a> -->
+        </div></div>
+    </div>
+    <p class="fine">Apple Executive Store is an independent mobile retailer in Faisalabad. It is not affiliated with Apple Inc. Prices and stock on this page are confirmed on WhatsApp before you travel.</p>
+  </div>
+</footer>
+
+<!-- ═══ Sticky bottom bar — mobile only ═══ -->
+<nav class="bar" aria-label="Quick actions">
+  <a href="tel:+923217357119"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>Call</a>
+  <a class="wa" href="https://wa.me/923217357119" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Apple%20Executive%20Store%2C%20Main%20Ketchary%20Bazar%2C%20Street%20%235%20opposite%20Al%20Javed%20Center%2C%20Faisalabad%2038000" target="_blank" rel="noopener">Directions</a>
+</nav>
+
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+  OWNER: HOW TO UPDATE TODAY'S STOCK — NO CODE, JUST THE GOOGLE SHEET
+═══════════════════════════════════════════════════════════════════════════════
+  The stock grid on this page reads a Google Sheet. To use it:
+  1. Make a Google Sheet with these columns in row 1, in this order:
+       model | storage | condition | price | status | photo
+  2. In Google Sheets: File → Share → Publish to web → pick the sheet,
+     choose "Comma-separated values (.csv)", Publish. Copy the link.
+  3. Paste that link into SHEET_URL at the top of the script below.
+     That is the only code change, ever.
+
+  ADD A PHONE: add one row. Example (model, storage, condition, price,
+  status, photo):
+       iPhone 13, 128 GB, New, 135000, available, https://i.ibb.co/abcd123/iphone-13.jpg
+  Price: numbers only, no commas, no "Rs". Leave price empty and the card
+  will show "Price poochhein".
+
+  MARK A PHONE SOLD: change its status from "available" to "sold".
+  The card disappears from the website on the next page load.
+  Delete the row later if you want; "sold" is enough.
+
+  PHOTOS: the photo column needs a DIRECT image link — the link must end
+  at the image file itself. Links from ImgBB ("Direct link") and
+  Cloudinary work. A normal Google Drive share link does NOT work (it
+  opens a Drive page, not an image), and the card will fall back to a
+  plain block with the phone's name. Leave photo empty for the same
+  plain block.
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   ★★★  EDIT HERE — OWNER CONFIG  ★★★
+   This is the only block you need to touch for day-to-day updates.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* 1) TODAY'S STOCK — live from a published Google Sheet (CSV).
+      ★ Paste the published CSV link between the quotes. Nothing else to edit:
+      the grid below reads the sheet on every page load. Full owner
+      instructions are in the comment block above this script. ★ */
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/11tZNcnWbKm8gOtUCZCAjGolyyhc7IzM9WQaiLwvvOMg/export?format=csv&gid=278135423";
+
+/* 2) REVIEWS — paste real Google reviews exactly as written.
+      The two below are real reviews from the shop's Google profile.
+      sample:true entries are layout placeholders — replace or delete them. */
+const REVIEWS = [
+  { stars:5, text:"Every model of Mobile available there..", name:"zakawat raju — Google review, 2020", sample:false },
+  { stars:5, text:"Sample slot — paste the newest Google review here, word for word.", name:"Replace before publishing", sample:true },
+  { stars:5, text:"Sample slot — the Asadullah Irfan 5-star review from Oct 2026 (he praised Junaid's service by name) goes here once its full text is pasted.", name:"Replace before publishing", sample:true }
+];
+
+/* 3) LINKS — ★ replace REVIEW_LINK with the real GBP "write a review" link.
+      Until then the button points to the shop's Google search listing. */
+const REVIEW_LINK = "https://www.google.com/maps/search/Apple+Executive+Store+Ketchary+Bazar+Faisalabad";
+document.getElementById("reviewBtn").href = REVIEW_LINK;
+
+/* 4) HOURS — minutes from midnight, Asia/Karachi. Index: 0 = Sunday.
+      Fri (5) is 4 PM–10 PM; every other day 11 AM–9 PM. Matches GBP. */
+const HOURS = [
+  {d:"Sunday",   open:11*60, close:21*60, label:"11 AM – 9 PM"},
+  {d:"Monday",   open:11*60, close:21*60, label:"11 AM – 9 PM"},
+  {d:"Tuesday",  open:11*60, close:21*60, label:"11 AM – 9 PM"},
+  {d:"Wednesday",open:11*60, close:21*60, label:"11 AM – 9 PM"},
+  {d:"Thursday", open:11*60, close:21*60, label:"11 AM – 9 PM"},
+  {d:"Friday",   open:16*60, close:22*60, label:"4 PM – 10 PM"},
+  {d:"Saturday", open:11*60, close:21*60, label:"11 AM – 9 PM"}
+];
+const PHONE_WA = "923217357119";
+
+/* ── Rendering (no need to edit below) ─────────────────────────────────── */
+/* ── Live stock grid (no need to edit below) ──────────────────────────── */
+const stockGrid = document.getElementById("stockGrid");
+const stockUpdated = document.getElementById("stockUpdated");
+const STOCK_CACHE_KEY = "aes_stock_csv", STOCK_TIME_KEY = "aes_stock_time";
+let stockHasContent = false;
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+
+/* Proper CSV parser: handles quoted fields, commas and line breaks inside
+   quotes, and "" as an escaped quote. (No split(",") anywhere.) */
+function parseCSV(text){
+  const rows = []; let row = [], field = "", inQuotes = false;
+  text = String(text).replace(/^\uFEFF/, ""); /* strip BOM */
+  for (let i = 0; i < text.length; i++){
+    const c = text[i], n = text[i + 1];
+    if (inQuotes){
+      if (c === '"' && n === '"'){ field += '"'; i++; }
+      else if (c === '"'){ inQuotes = false; }
+      else field += c;
+    } else if (c === '"'){ inQuotes = true; }
+    else if (c === ","){ row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r"){
+      if (c === "\r" && n === "\n") i++;
+      row.push(field); field = ""; rows.push(row); row = [];
+    } else field += c;
+  }
+  if (field !== "" || row.length){ row.push(field); rows.push(row); }
+  return rows;
+}
+
+/* Sheet rows → available phones only. Headers matched case-insensitively,
+   extra columns ignored, empty rows ignored, "sold" (and anything that is
+   not "available") hidden. */
+function sheetToPhones(csv){
+  const rows = parseCSV(csv);
+  if (!rows.length) return [];
+  const head = rows[0].map(h => h.trim().toLowerCase());
+  const col = name => head.indexOf(name);
+  const ci = { model:col("model"), storage:col("storage"), condition:col("condition"),
+               price:col("price"), status:col("status"), photo:col("photo") };
+  if (ci.model < 0 || ci.status < 0) return [];
+  const get = (r, i) => (i >= 0 && r[i] !== undefined ? String(r[i]).trim() : "");
+  return rows.slice(1)
+    .filter(r => r.some(c => String(c).trim() !== ""))
+    .filter(r => get(r, ci.status).toLowerCase() === "available")
+    .map(r => ({ model:get(r, ci.model), storage:get(r, ci.storage),
+                 condition:get(r, ci.condition), price:get(r, ci.price),
+                 photo:get(r, ci.photo) }))
+    .filter(p => p.model !== "");
+}
+
+function formatPrice(raw){
+  const n = parseFloat(String(raw).replace(/[^0-9.]/g, ""));
+  return isNaN(n) || n <= 0 ? "Price poochhein" : "Rs " + Math.round(n).toLocaleString("en-PK");
+}
+
+function stockFallback(model){
+  const d = document.createElement("div");
+  d.className = "photo-fallback"; d.textContent = model;
+  return d;
+}
+
+function renderStock(phones){
+  stockHasContent = phones.length > 0;
+  if (!phones.length){ renderStockState("empty"); return; }
+  stockGrid.innerHTML = phones.map(p => {
+    const msg = encodeURIComponent(("Salam, " + p.model + " " + p.storage + " available hai?").replace(/\s+/g, " ").trim());
+    const photo = /^https?:\/\//i.test(p.photo)
+      ? `<img class="card-photo" src="${esc(p.photo)}" alt="${esc(p.model)}" loading="lazy">`
+      : `<div class="photo-fallback">${esc(p.model)}</div>`;
+    return `<article class="card">
+      ${photo}
+      <h3>${esc(p.model)}</h3>
+      ${p.storage ? `<p class="tag-row"><span class="storage-tag">${esc(p.storage)}</span></p>` : ""}
+      ${p.condition ? `<p class="spec">${esc(p.condition)}</p>` : ""}
+      <p class="price">${esc(formatPrice(p.price))}</p>
+      <a class="btn btn-outline btn-block" target="_blank" rel="noopener"
+         href="https://wa.me/${PHONE_WA}?text=${msg}">Ask on WhatsApp</a>
+    </article>`;
+  }).join("");
+  /* A photo URL that fails to load is swapped for the neutral fallback block */
+  stockGrid.querySelectorAll("img.card-photo").forEach(img =>
+    img.addEventListener("error", () => img.replaceWith(stockFallback(img.alt)), { once:true }));
+}
+
+function renderStockState(kind){
+  const text = kind === "empty"
+    ? "Aaj ka stock update ho raha hai. WhatsApp pe poochh lein."
+    : "Stock load nahi hua. Seedha WhatsApp karein.";
+  const msg = encodeURIComponent("Salam, aaj ka stock bata dein.");
+  stockGrid.innerHTML = `<div class="stock-state">
+      <p>${text}</p>
+      <a class="btn btn-primary" target="_blank" rel="noopener"
+         href="https://wa.me/${PHONE_WA}?text=${msg}">WhatsApp karein</a>
+    </div>`;
+}
+
+function renderSkeletons(){
+  stockGrid.innerHTML = Array.from({ length:4 }, () => `
+    <article class="card" aria-hidden="true">
+      <div class="skel skel-photo"></div>
+      <div class="skel skel-h"></div>
+      <div class="skel skel-line"></div>
+      <div class="skel skel-price"></div>
+      <div class="skel skel-btn"></div>
+    </article>`).join("");
+}
+
+function showUpdated(ts){
+  if (!stockUpdated || !ts) return;
+  stockUpdated.textContent = "Last updated: " + new Date(ts).toLocaleString("en-PK",
+    { day:"numeric", month:"short", hour:"numeric", minute:"2-digit", hour12:true, timeZone:"Asia/Karachi" }) + " (Faisalabad time)";
+}
+
+async function loadStock(){
+  /* 1) Cache first: show the last good stock instantly, refresh behind it */
+  let cached = null, cachedTime = null;
+  try {
+    cached = localStorage.getItem(STOCK_CACHE_KEY);
+    cachedTime = +localStorage.getItem(STOCK_TIME_KEY) || null;
+  } catch (e) { /* storage unavailable (private mode) — carry on without it */ }
+  if (cached){
+    const phones = sheetToPhones(cached);
+    if (phones.length){ renderStock(phones); showUpdated(cachedTime); }
+    else renderSkeletons();
+  } else renderSkeletons();
+
+  /* 2) Fresh fetch — the sheet's export link first; if that fails for any
+        reason, the same sheet is tried once more through Google's second
+        (gviz) CSV endpoint before giving up. */
+  const sheetId = (SHEET_URL.match(/spreadsheets\/d\/([^/]+)/) || [])[1];
+  const urls = [SHEET_URL];
+  if (sheetId) urls.push("https://docs.google.com/spreadsheets/d/" + sheetId + "/gviz/tq?tqx=out:csv&sheet=Stock");
+  let csv = null, lastErr = null;
+  for (const u of urls){
+    try {
+      if (!/^https?:\/\//i.test(u)) throw new Error("SHEET_URL not set");
+      const res = await fetch(u, { cache:"no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      csv = await res.text();
+      if (csv.trim() !== "") break; else csv = null;
+    } catch (e) { lastErr = e; }
+  }
+  try {
+    if (csv === null) throw lastErr || new Error("fetch failed");
+    const now = Date.now();
+    try { localStorage.setItem(STOCK_CACHE_KEY, csv); localStorage.setItem(STOCK_TIME_KEY, String(now)); } catch (e) {}
+    renderStock(sheetToPhones(csv));
+    showUpdated(now);
+  } catch (e) {
+    /* Keep showing the cache if we have it; error state only if we have nothing */
+    if (!stockHasContent) renderStockState("error");
+  }
+}
+loadStock();
+
+document.getElementById("reviewGrid").innerHTML = REVIEWS.map(r => `
+  <figure class="rev${r.sample ? " sample" : ""}">
+    <span class="stars" aria-label="${r.stars} out of 5 stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</span>
+    <blockquote>${r.sample ? r.text : "“" + r.text + "”"}</blockquote>
+    <figcaption>${r.name}</figcaption>
+  </figure>`).join("");
+
+/* Hours table, Monday-first, today highlighted */
+const order = [1,2,3,4,5,6,0];
+document.getElementById("hoursBody").innerHTML = order.map(i =>
+  `<tr data-day="${i}"><td>${HOURS[i].d}</td><td>${HOURS[i].label}</td></tr>`).join("");
+
+/* Live open/closed — always computed in Asia/Karachi, wherever the visitor is */
+function karachiNow(){
+  const parts = new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Karachi",
+    weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
+  const get = t => parts.find(p => p.type === t).value;
+  const dayIdx = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(get("weekday"));
+  return { dayIdx, mins:(+get("hour") % 24) * 60 + (+get("minute")) };
+}
+function fmtTime(mins){
+  let h = Math.floor(mins/60), m = mins%60, ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12;
+  return h + (m ? ":" + String(m).padStart(2,"0") : "") + " " + ap;
+}
+function updateStatus(){
+  const {dayIdx, mins} = karachiNow(), t = HOURS[dayIdx];
+  let open, msg;
+  if (mins >= t.open && mins < t.close){ open = true;  msg = "Open now · closes " + fmtTime(t.close); }
+  else if (mins < t.open){              open = false; msg = "Closed · opens today at " + fmtTime(t.open); }
+  else { const n = HOURS[(dayIdx+1)%7]; open = false; msg = "Closed · opens " + n.d + " at " + fmtTime(n.open); }
+  [["openStatus","openStatusText"],["openStatus2","openStatusText2"]].forEach(([box,txt]) => {
+    const b = document.getElementById(box); if(!b) return;
+    b.classList.toggle("open", open); b.classList.toggle("closed", !open);
+    document.getElementById(txt).textContent = msg;
+  });
+  document.querySelectorAll("#hoursBody tr").forEach(tr =>
+    tr.classList.toggle("today", +tr.dataset.day === dayIdx));
+}
+updateStatus(); setInterval(updateStatus, 60000);
+
+/* Subtle reveal on scroll */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
